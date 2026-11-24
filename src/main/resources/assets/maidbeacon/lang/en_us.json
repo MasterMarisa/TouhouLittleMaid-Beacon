@@ -21,5 +21,6 @@
   "gui.maidbeacon.render_setting.enable_sky_halo": "Enable Sky Halo Rendering",
 
   "config.maidbeacon.server.effect_check_interval": "Ticks between two aura applications. Only affects performance and how quickly effects react when entities enter or leave the range.",
-  "config.maidbeacon.server.whitelist": "Entity types the beacon may affect. Plain registry names, or #tags (e.g. #minecraft:animals)."
+  "config.maidbeacon.server.whitelist": "Entity types the beacon may affect. Plain registry names, or #tags (e.g. #minecraft:animals).",
+  "config.maidbeacon.client.render_y_offset": "Beacon Render Y Offset"
 }

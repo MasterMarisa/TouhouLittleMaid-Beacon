@@ -21,5 +21,6 @@
   "gui.maidbeacon.render_setting.enable_sky_halo": "启用天空光环渲染",
 
   "config.maidbeacon.server.effect_check_interval": "信标检测目标实体并施加效果的间隔 (注意：此项只会影响性能和进出信标范围时效果响应的灵敏度，不会导致效果无法接续)",
-  "config.maidbeacon.server.whitelist": "受信标影响的实体类型. (支持注册名和以\"#\"开头的 tag, 例如 #minecraft:animals)"
+  "config.maidbeacon.server.whitelist": "受信标影响的实体类型. (支持注册名和以\"#\"开头的 tag, 例如 #minecraft:animals)",
+  "config.maidbeacon.client.render_y_offset": "信标渲染 Y 轴偏移"
 }

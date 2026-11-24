@@ -1,7 +1,9 @@
 package com.mastermarisa.maidbeacon.config;
 
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
@@ -15,8 +17,15 @@ public final class Config {
         return Server.TARGET_WHITELIST.get();
     }
 
+    public static double renderYOffset() {
+        return Client.RENDER_Y_OFFSET.getAsDouble();
+    }
+
     public static void register(ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.SERVER, Server.SPEC);
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            modContainer.registerConfig(ModConfig.Type.CLIENT, Client.SPEC);
+        }
     }
 
     private static final class Server {
@@ -46,7 +55,24 @@ public final class Config {
         }
     }
 
+    private static final class Client {
+        static final ModConfigSpec.DoubleValue RENDER_Y_OFFSET;
+        static final ModConfigSpec SPEC;
+
+        static {
+            ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
+
+            RENDER_Y_OFFSET = builder
+                    .translation("config.maidbeacon.client.render_y_offset")
+                    .comment("Vertical offset in blocks applied to the beacon beam, model and halos.",
+                            "Raise it for maid models that are taller than the vanilla hitbox,",
+                            "lower it for smaller ones.")
+                    .defineInRange("render_y_offset", 0.0D, -2.0D, 4.0D);
+
+            SPEC = builder.build();
+        }
+    }
+
     private Config() {
     }
 }
-

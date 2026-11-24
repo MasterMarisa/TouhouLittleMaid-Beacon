@@ -3,6 +3,7 @@ package com.mastermarisa.maidbeacon.client.render;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.mastermarisa.maidbeacon.MaidBeacon;
 import com.mastermarisa.maidbeacon.client.render.HaloGeometry.ColorKey;
+import com.mastermarisa.maidbeacon.config.Config;
 import com.mastermarisa.maidbeacon.content.RenderSettingsAttachment;
 import com.mastermarisa.maidbeacon.data.ExtraRenderSettings;
 import com.mastermarisa.maidbeacon.utils.MaidUtils;
@@ -70,6 +71,7 @@ public final class MaidBeaconRenderEvents {
         MultiBufferSource.BufferSource buffers = minecraft.renderBuffers().bufferSource();
         float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
         long gameTime = level.getGameTime();
+        double renderYOffset = Config.renderYOffset();
 
         boolean drewAnything = false;
         for (Entity entity : level.entitiesForRendering()) {
@@ -92,7 +94,7 @@ public final class MaidBeaconRenderEvents {
             poseStack.pushPose();
             poseStack.translate(
                     Mth.lerp(partialTick, maid.xOld, maid.getX()) - camera.x,
-                    Mth.lerp(partialTick, maid.yOld, maid.getY()) - camera.y,
+                    Mth.lerp(partialTick, maid.yOld, maid.getY()) - camera.y + renderYOffset,
                     Mth.lerp(partialTick, maid.zOld, maid.getZ()) - camera.z);
             drawBeacon(poseStack, buffers, settings, maid, partialTick, gameTime,
                     distanceSquared > LOD_DISTANCE_SQUARED ? COARSE_STEP_DEGREES : FINE_STEP_DEGREES);
