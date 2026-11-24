@@ -2,7 +2,7 @@ package com.mastermarisa.maidbeacon.event;
 
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.mastermarisa.maidbeacon.MaidBeacon;
-import com.mastermarisa.maidbeacon.client.gui.screen.rendering.RenderSettingsScreen;
+import com.mastermarisa.maidbeacon.client.screen.RenderSettingsScreen;
 import com.mastermarisa.maidbeacon.init.ModItems;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
@@ -25,3 +25,4 @@ public class OnInteractMaid {
         }
     }
 }
+

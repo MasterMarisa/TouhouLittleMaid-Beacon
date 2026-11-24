@@ -13,3 +13,4 @@ public class MaidPlugin implements ILittleMaid {
         manager.bind(ModItems.MOBILE_BEACON.get(), new BeaconEffectGeneratorBauble());
     }
 }
+

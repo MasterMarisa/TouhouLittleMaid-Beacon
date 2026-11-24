@@ -16,8 +16,6 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      # Fails fast with a clear message if gradle/wrapper/gradle-wrapper.jar is
-      # missing from the repo again (it was, until the 2.0.0 rewrite).
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4
 
@@ -33,7 +31,7 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
-      - name: Build with Gradle
+      - name: Build
         run: ./gradlew build --stacktrace
 
       - name: Upload artifacts

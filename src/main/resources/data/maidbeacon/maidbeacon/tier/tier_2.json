@@ -1,0 +1,8 @@
+{
+  "level": 2,
+  "budget": 3,
+  "upgrade": {
+    "material": { "item": "minecraft:netherite_block" },
+    "count": 9
+  }
+}

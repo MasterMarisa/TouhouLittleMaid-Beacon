@@ -1,8 +1,8 @@
 package com.mastermarisa.maidbeacon.item;
 
-import com.mastermarisa.maidbeacon.client.gui.screen.beacon.BeaconScreen;
-import com.mastermarisa.maidbeacon.data.MobileBeaconData;
-import com.mastermarisa.maidbeacon.init.ModDataComponents;
+import com.mastermarisa.maidbeacon.client.screen.BeaconScreen;
+import com.mastermarisa.maidbeacon.content.BeaconComponent;
+import com.mastermarisa.maidbeacon.logic.BeaconState;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -16,19 +16,25 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class MobileBeaconItem extends Item {
-    public MobileBeaconItem() {
-        super((new Item.Properties()).stacksTo(1));
+    public MobileBeaconItem(Properties properties) {
+        super(properties);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        ItemStack itemInHand = player.getItemInHand(usedHand);
-        if (level.isClientSide()) BeaconScreen.open(player, usedHand, itemInHand);
-        return InteractionResultHolder.success(itemInHand);
+        ItemStack beacon = player.getItemInHand(usedHand);
+        if (level.isClientSide()) {
+            BeaconScreen.open(usedHand);
+        }
+        return InteractionResultHolder.sidedSuccess(beacon, level.isClientSide());
     }
 
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-        MobileBeaconData beaconData = itemStack.getOrDefault(ModDataComponents.MOBILE_BEACON_DATA.get(), new MobileBeaconData());
-        tooltip.add(Component.literal("信标等级: " + beaconData.getLevel()).withStyle(ChatFormatting.AQUA));
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        BeaconState state = stack.getOrDefault(BeaconComponent.BEACON_STATE.get(), BeaconState.EMPTY);
+        tooltip.add(Component.translatable("tooltip.maidbeacon.level", state.level()).withStyle(ChatFormatting.AQUA));
+        tooltip.add(Component.translatable("tooltip.maidbeacon.active_auras", state.auras().size())
+                .withStyle(ChatFormatting.GRAY));
     }
 }
+

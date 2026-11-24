@@ -1,9 +1,11 @@
 package com.mastermarisa.maidbeacon;
 
 import com.mastermarisa.maidbeacon.config.Config;
-import com.mastermarisa.maidbeacon.init.ModDataComponents;
-import com.mastermarisa.maidbeacon.init.ModEntities;
+import com.mastermarisa.maidbeacon.content.BeaconComponent;
+import com.mastermarisa.maidbeacon.content.RenderSettingsAttachment;
+import com.mastermarisa.maidbeacon.data.DataPackRegistries;
 import com.mastermarisa.maidbeacon.init.ModItems;
+import com.mastermarisa.maidbeacon.utils.EntityFilter;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -21,9 +23,14 @@ public class MaidBeacon {
     }
 
     public MaidBeacon(IEventBus modEventBus, ModContainer modContainer) {
-        ModEntities.register(modEventBus);
+        modEventBus.addListener(DataPackRegistries::register);
+
+        BeaconComponent.register(modEventBus);
+        RenderSettingsAttachment.register(modEventBus);
         ModItems.register(modEventBus);
-        ModDataComponents.register(modEventBus);
         Config.register(modContainer);
+
+        modEventBus.addListener(EntityFilter::onConfigReloaded);
     }
 }
+

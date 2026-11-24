@@ -18,6 +18,7 @@ public class ModItems {
 
     static {
         ITEMS = DeferredRegister.createItems(MaidBeacon.MOD_ID);
-        MOBILE_BEACON = ITEMS.registerItem("mobile_beacon", (properties) -> new MobileBeaconItem());
+        MOBILE_BEACON = ITEMS.registerItem("mobile_beacon", (properties) -> new MobileBeaconItem(properties.stacksTo(1)));
     }
 }
+

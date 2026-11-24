@@ -1,0 +1,8 @@
+{
+  "level": 1,
+  "budget": 2,
+  "upgrade": {
+    "material": { "item": "minecraft:diamond_block" },
+    "count": 9
+  }
+}

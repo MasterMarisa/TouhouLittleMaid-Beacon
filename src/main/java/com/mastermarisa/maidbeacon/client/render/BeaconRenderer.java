@@ -52,7 +52,7 @@ public class BeaconRenderer {
 
     public static void renderBeaconModel(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, EntityMaid entity, float partialTick) {
         poseStack.pushPose();
-        poseStack.translate((double)0.0F, (double)entity.getBbHeight() + (entity.isMaidInSittingPose() ? -0.1 : 0.4) - 1, (double)0.0F);
+        poseStack.translate(0.0F, (double)entity.getBbHeight() + (entity.isMaidInSittingPose() ? -0.1 : 0.4) - 1, (double)0.0F);
         long gameTime = entity.level().getGameTime();
         float rotation = ((float)gameTime + partialTick) * 3.0F;
         poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
@@ -61,3 +61,4 @@ public class BeaconRenderer {
         poseStack.popPose();
     }
 }
+
