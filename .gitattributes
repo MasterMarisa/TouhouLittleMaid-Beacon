@@ -1,2 +1,13 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Gradle wrapper: the shell script MUST stay LF or it breaks on Linux CI,
+# and the .bat MUST stay CRLF or cmd.exe misparses it.
+gradlew        text eol=lf
+gradlew.bat    text eol=crlf
+*.sh           text eol=lf
+*.bat          text eol=crlf
+
+# Binaries that must never be normalized
+*.jar          binary
+*.png          binary

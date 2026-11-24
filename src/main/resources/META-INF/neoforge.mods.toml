@@ -3,34 +3,30 @@ loaderVersion="${loader_version_range}"
 license="${mod_license}"
 
 [[mods]]
-modId="maidbeacon"
-version="1.0.0"
-displayName="Touhou Little Maid: Beacon"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
 logoFile="icon.png"
-authors="摸里傻"
-
 description='''
-让你的女仆成为一座移动信标吧！
+${mod_description}
 '''
 
-[[mixins]]
-config="maidbeacon.mixins.json"
-
-[[dependencies."maidbeacon"]]
+[[dependencies."${mod_id}"]]
 modId="neoforge"
 type="required"
 versionRange="[${neo_version},)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies."maidbeacon"]]
+[[dependencies."${mod_id}"]]
 modId="minecraft"
 type="required"
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies."maidbeacon"]]
+[[dependencies."${mod_id}"]]
 modId="touhou_little_maid"
 type="required"
 versionRange="[1.4.6,)"

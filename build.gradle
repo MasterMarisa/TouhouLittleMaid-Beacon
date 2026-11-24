@@ -5,20 +5,16 @@ plugins {
     id 'idea'
 }
 
-tasks.named('wrapper', Wrapper).configure {
-    distributionType = Wrapper.DistributionType.BIN
-}
-
 version = mod_version
 group = mod_group_id
 
 repositories.clear()
 repositories {
-    maven {url = "https://maven.aliyun.com/repository/public"}
-    maven {url = "https://libraries.minecraft.net/"}
-    maven {url = "https://neoforged.forgecdn.net/releases"}
-    maven {url = "https://neoforged.forgecdn.net/mojang-meta"}
-    maven {url = "https://cursemaven.com"}
+    maven { url = "https://maven.aliyun.com/repository/public" }
+    maven { url = "https://libraries.minecraft.net/" }
+    maven { url = "https://neoforged.forgecdn.net/releases" }
+    maven { url = "https://neoforged.forgecdn.net/mojang-meta" }
+    maven { url = "https://cursemaven.com" }
 }
 
 base {
@@ -45,11 +41,6 @@ neoForge {
         server {
             server()
             programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
-
-        gameTestServer {
-            type = "gameTestServer"
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
@@ -81,10 +72,9 @@ configurations {
 
 dependencies {
     implementation "curse.maven:touhou-little-maid-355044:7510722"
-    implementation "curse.maven:jade-324717:7428884"
 }
 
-var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+processResources {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
@@ -94,27 +84,13 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_name               : mod_name,
             mod_license            : mod_license,
             mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
     ]
     inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata"
-}
 
-sourceSets.main.resources.srcDir generateModMetadata
-
-neoForge.ideSyncTask generateModMetadata
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/repo"
-        }
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
     }
 }
 

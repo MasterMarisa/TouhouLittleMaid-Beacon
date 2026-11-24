@@ -6,8 +6,6 @@
 
 # BlueJ files
 *.ctxt
-
-# Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
@@ -22,3 +20,24 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Gradle
+.gradle/
+build/
+
+# IDE
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+
+# Minecraft run directories
+run/
+runs/
+logs/
+crash-reports/
+
+# The Gradle wrapper jar MUST be committed: without it `gradlew` cannot start
+# on a fresh clone, and CI fails before it ever reaches the build.
+!gradle/wrapper/gradle-wrapper.jar
